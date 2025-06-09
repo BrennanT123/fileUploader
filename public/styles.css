@@ -1,0 +1,274 @@
+html,
+body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  box-sizing: border-box;
+  background-color: var(--body_color);
+}
+:root {
+  box-sizing: border-box;
+  --register_form_height: 500px;
+  --body_color :rgb(12, 12, 54);
+  --action_color: rgb(100, 10, 100);
+  --box_color: rgb(22, 22, 61); 
+  color: white;
+  font-family: "Oswald", sans-serif;
+}
+.oswald-font {
+  font-family: "Oswald", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 100;
+  font-style: normal;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+body {
+  display: flex;
+  flex-direction: column;
+}
+
+#main_section {
+  display: flex;
+}
+
+/* headers stuff */
+.header_container {
+  display: flex;
+  justify-content: space-between;
+  padding: 20px 10%;
+  align-items: center;
+}
+header {
+  background-color: var(--action_color);
+  border-radius: 50px;
+  width: 50vw;
+  align-self: center;
+}
+
+img {
+  height: 50px;
+  width: auto;
+}
+
+#logout_icon,
+#uploadFile,
+#site_name {
+  transition: transform 0.5s, opacity 0.5s;
+}
+
+#site_name:hover {
+  transform: translateY(-5px);
+  opacity: 0.33;
+}
+
+.dropdown {
+  position: relative;
+}
+
+.dropdown-toggle {
+  background-color: var(--action_color);
+  color: white;
+  padding: 0.5rem 1rem;
+  border: none;
+  cursor: pointer;
+  font-size: 1.1rem;
+  border-radius: 6px;
+}
+
+.dropdown-menu {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background-color: var(--box_color);
+  box-shadow: 0px 4px 8px rgba(0,0,0,0.4);
+  display: none;
+  flex-direction: column;
+  min-width: 180px;
+  z-index: 10;
+  border-radius: 8px;
+}
+
+.dropdown-menu a {
+  padding: 0.75rem 1rem;
+  text-decoration: none;
+  color: white;
+  display: block;
+}
+
+.dropdown-menu a:hover {
+  background-color: var(--action_color);
+}
+
+.dropdown:hover .dropdown-menu {
+  display: flex;
+}
+
+.dropdown-toggle img
+{
+    height: 50px;
+    width: auto;
+}
+
+/* Files container stuff */
+.files_container {
+  background-color: var(--box_color);
+  color: white;
+  padding: 1rem 1.5rem;
+  margin: 1rem auto;
+  border-radius: 10px;
+  width: 50vw;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-family: "Oswald", sans-serif;
+}
+
+.file_info {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.file_info h2 {
+  margin: 0;
+  font-size: 1rem;
+  font-weight: 400;
+}
+
+.file_info div:first-child {
+  font-weight: bold;
+  font-size: 1.1rem;
+}
+
+.download-link {
+  color: var(--action_color);
+  text-decoration: underline;
+  cursor: pointer;
+  transition: color 0.3s ease;
+  align-self: flex-start;
+}
+
+.download-link:hover {
+  color: white;
+}
+
+.delete_form {
+  margin-left: auto;
+}
+
+.delete_button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+}
+
+.delete_icon {
+  width: 24px;
+  height: 24px;
+  filter: invert(80%) sepia(0%) saturate(0%) hue-rotate(182deg) brightness(93%) contrast(88%);
+  transition: transform 0.2s ease;
+}
+
+.delete_icon:hover {
+  transform: scale(1.1);
+  filter: invert(100%);
+}
+
+
+.folder_container {
+  background-color: var(--box_color);
+  color: white;
+  padding: 1rem 1.5rem;
+  margin: 1rem auto;
+  border-radius: 10px;
+  width: 50vw;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-family: "Oswald", sans-serif;
+  transition: background-color 0.3s ease;
+}
+
+.folder_container:hover {
+  background-color: #2a2f4a;
+}
+
+.folder_info h2 {
+  margin: 0;
+  font-size: 1.4rem;
+  font-weight: 500;
+}
+
+.folder-link {
+  text-decoration: none;
+  color: var(--action_color);
+  transition: color 0.3s ease;
+}
+
+.folder-link:hover {
+  color: white;
+}
+
+.delete_form {
+  margin-left: 1rem;
+}
+
+.delete_button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0.2rem;
+}
+
+.delete_icon {
+  width: 24px;
+  height: 24px;
+  transition: filter 0.3s ease;
+}
+
+.delete_button:hover .delete_icon {
+  filter: brightness(1.5);
+}
+
+.folder_form {
+  margin-top: 0.75rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.folder_dropdown {
+  padding: 0.5rem;
+  border-radius: 5px;
+  background-color: #222645;
+  color: white;
+  border: none;
+}
+
+.folder_dropdown:focus {
+  outline: 2px solid var(--action_color);
+}
+
+.move_button {
+  padding: 0.5rem 1rem;
+  background-color: var(--action_color);
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background-color 0.2s ease-in-out;
+}
+
+.move_button:hover {
+  background-color: rgb(120, 20, 120);
+}
+

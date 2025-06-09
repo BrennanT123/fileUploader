@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="/modal.css" />
+    <link rel="stylesheet" href="/styles.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Oswald:wght@200..700&family=WDXL+Lubrifont+TC&display=swap"
+      rel="stylesheet"
+    />
+    <script src="/modal.js" defer></script>
+  </head>
+  <body>
+    <%- include("partials/header.ejs") %>
+    <div class="errrors_box"><%- include("partials/errors.ejs") %></div>
+
+    <% if (locals.folders) { %> <% folders.forEach(folder => { %>
+    <div class="folder_container">
+      <div class="folder_info">
+        <a href="/folder/<%= folder.folderName %>" class="folder-link"
+          ><h2><%=folder.folderName %></h2></a
+        >
+      </div>
+      <form
+        action="/deleteFolder/<%= folder.id %>"
+        method="POST"
+        class="delete_form"
+      >
+        <button type="submit" class="delete_button">
+          <img src="/trash-can.svg" alt="Delete" class="delete_icon" />
+        </button>
+      </form>
+    </div>
+    <% }); %> <% } %> <% if (locals.files) { %> 
+  <% files.forEach(file => { %>
+    <div class="files_container">
+      <div class="file_info">
+        <div>
+          <%= file.originalName %> — Uploaded on <%= file.formatted_date %>
+        </div>
+        <h2>Size: <%= file.size %></h2>
+        <a href="/download/<%= file.fileName %>" class="download-link">Download</a>
+
+    
+        <form action="/move-file/<%= file.id %>" method="POST" class="folder_form">
+          <label for="folderSelect_<%= file.id %>" class="folder_label">Move to folder:</label>
+          <select name="folderID" id="folderSelect_<%= file.id %>" class="folder_dropdown">
+            <option value="">-- None --</option>
+            <% folders.forEach(folder => { %>
+              <option value="<%= folder.id %>" <%= file.folderID === folder.id ? "selected" : "" %>>
+                <%= folder.folderName %>
+              </option>
+            <% }) %>
+          </select>
+          <button type="submit" class="move_button">Move</button>
+        </form>
+      </div>
+
+      <form action="/delete/<%= file.id %>" method="POST" class="delete_form">
+        <button type="submit" class="delete_button">
+          <img src="/trash-can.svg" alt="Delete" class="delete_icon" />
+        </button>
+      </form>
+    </div>
+  <% }); %> 
+<% } %>
+
+
+    <div class="modal-overlay" id="modal">
+      <div class="modal-content">
+        <button class="close-button" id="closeModal">&times;</button>
+        <h2>Upload file</h2>
+        <form action="/upload" method="POST" enctype="multipart/form-data">
+          <label for="fileToUpload">File: </label>
+          <input
+            type="file"
+            id="fileToUpload"
+            name="fileToUpload"
+            accept=".pdf,.doc,.docx,.dot,.dotx,.rtf,.odt,.xls,.xlsx,.xlsm,.csv,.ods,.ppt,.pptx,.odp, .txt"
+            required
+          />
+          <button type="submit">Submit</button>
+        </form>
+      </div>
+    </div>
+
+    <div class="modal-overlay" id="folderModal">
+      <div class="modal-content">
+        <button class="close-button" id="closeFolderModal">&times;</button>
+        <h2>Create Folder</h2>
+        <form action="/create-folder" method="POST">
+          <label for="folderName">Folder Name:</label>
+          <input
+            type="text"
+            id="folderName"
+            name="folderName"
+            placeholder="Enter folder name"
+            required
+          />
+          <button type="submit">Submit</button>
+        </form>
+      </div>
+    </div>
+  </body>
+</html>

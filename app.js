@@ -7,17 +7,14 @@ import path from "node:path";
 import { fileURLToPath } from "url";
 //import pgpool from './database/pool.js';
 import routes from "./routes/index.js";
-import './config/passport.js';
+import "./config/passport.js";
 import { PrismaClient, Prisma } from "./generated/prisma/index.js";
 import { PrismaSessionStore } from "@quixo3/prisma-session-store";
 
 
 dotenv.config();
 
-
 const app = express();
-
-
 
 //Sessionsetup
 app.use(
@@ -61,3 +58,13 @@ app.use(routes);
 // Start the session
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => console.log(`Express app listening on port ${PORT}!`));
+
+
+
+//Cloud stuff
+
+import { createClient } from '@supabase/supabase-js'
+
+const supabaseUrl = 'https://veacmefrdaemsnyrnrho.supabase.co'
+const supabaseKey = process.env.SUPABASE_KEY
+const supabase = createClient(supabaseUrl, supabaseKey)

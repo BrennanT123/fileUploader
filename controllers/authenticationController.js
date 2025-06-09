@@ -17,7 +17,7 @@ export const postRegister = [
     if (!validateErrors.isEmpty()) {
       return res.status(400).render("register", {
         errors: validateErrors.array(),
-        //data: req.body //to repopulate the form. Not used but can include in future
+        data: req.body //to repopulate the form. Not used but can include in future
       });
     }
     const { hash, salt } = pswdUtils.genPasswordHashAndSalt(req.body.password);
@@ -30,7 +30,6 @@ export const postRegister = [
           salt: salt,
           first_name: req.body.first_name,
           last_name: req.body.last_name,
-          membership_status: req.body.membership_status === "true",
         },
       });
       res.redirect("/login");
